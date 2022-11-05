@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     '''
+    Profile model.
     Extends user model with additional information about user
     '''
     owner = models.OneToOneField(User, on_delete=models.CASCADE)

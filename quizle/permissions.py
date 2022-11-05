@@ -1,7 +1,7 @@
 from rest_framework import permissions
 
 
-class isOwnerOrReadOnly(permissions.BasePermission):
+class IsOwnerOrReadOnly(permissions.BasePermission):
     '''
     Allows users to update/delete model instances that they own
     '''

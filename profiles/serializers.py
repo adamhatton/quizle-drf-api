@@ -14,6 +14,16 @@ class ProfileSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.owner
 
+    def validate_image(self, value):
+        '''
+        Validates that profile image is smaller than 2MB
+        '''
+        if value.size > 1024 * 1024 * 2:
+            raise serializers.ValidationError(
+                'Image size larger than 2MB!'
+            )
+        return value
+
     class Meta:
         ''' Metadata for Profile Serializer '''
         model = Profile
