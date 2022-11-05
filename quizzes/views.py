@@ -18,7 +18,7 @@ class QuizList(generics.ListCreateAPIView):
 
 class QuizDetail(generics.RetrieveUpdateDestroyAPIView):
     '''
-    Displays a single quiz and allows the owner to edit or delete it
+    Display a single quiz and allow the owner to edit or delete it
     '''
     serializer_class = QuizSerializer
     permission_classes = [IsOwnerOrReadOnly]

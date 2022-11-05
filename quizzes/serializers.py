@@ -26,6 +26,16 @@ class QuizSerializer(serializers.ModelSerializer):
             )
         return value
 
+    def validate_category(self, value):
+        '''
+        Validates that a category has been selected
+        '''
+        if value == '':
+            raise serializers.ValidationError(
+                'Please select a category'
+            )
+        return value
+
     class Meta:
         ''' Metadata for Quiz Serializer '''
         model = Quiz
