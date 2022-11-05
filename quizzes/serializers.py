@@ -24,7 +24,7 @@ class QuizSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 'Time limit must be between 30 seconds and 10 minutes'
             )
-        return value         
+        return value
 
     class Meta:
         ''' Metadata for Quiz Serializer '''
@@ -35,7 +35,7 @@ class QuizSerializer(serializers.ModelSerializer):
             'title',
             'description',
             'category',
-            'validate_time_limit_seconds',
+            'time_limit_seconds',
             'created_on',
             'updated_on',
             'ans_1',

@@ -14,7 +14,7 @@ class ProfileList(generics.ListAPIView):
 
 class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     '''
-    Displays a single profile
+    Displays a single profile and allows the owner to edit or delete it
     '''
     serializer_class = ProfileSerializer
     permission_classes = [IsOwnerOrReadOnly]
