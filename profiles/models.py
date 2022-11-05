@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
+    '''
+    Extends user model with additional information about user
+    '''
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
     image = models.ImageField(
@@ -14,13 +17,18 @@ class Profile(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
+        '''
+        Orders Profile objects in reverse order of when they were created
+        '''
         ordering = ['-created_on']
 
     def __str__(self):
+        '''Returns the string representation of a model instance'''
         return f"{self.owner}'s profile"
 
 
 def create_profile(sender, instance, created, **kwargs):
+    '''Creates a Profile object if a User has been created'''
     if created:
         Profile.objects.create(owner=instance)
 
