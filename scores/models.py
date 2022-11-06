@@ -23,7 +23,7 @@ class Score(models.Model):
         'unique_together' ensures a User can only have 1 score per quiz
         '''
         ordering = ['-created_on']
-        unique_together = ['owner', 'score']
+        unique_together = ['owner', 'quiz']
 
     def __str__(self):
         '''Returns the string representation of a model instance'''
