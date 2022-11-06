@@ -1,5 +1,6 @@
 from django.db.models import Count
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from quizle.permissions import IsOwnerOrReadOnly
 from .models import Quiz
 from .serializers import QuizSerializer
@@ -14,6 +15,25 @@ class QuizList(generics.ListCreateAPIView):
     queryset = Quiz.objects.annotate(
         likes_count=Count('likes'),
     ).order_by('-created_on')
+
+    filter_backends = [
+        filters.OrderingFilter,
+        filters.SearchFilter,
+        DjangoFilterBackend,
+    ]
+
+    ordering_fields = [
+        'likes_count',
+    ]
+
+    search_fields = [
+        'owner__username',
+        'title',
+    ]
+
+    filterset_fields = [
+        'category',
+    ]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
