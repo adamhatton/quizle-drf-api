@@ -50,4 +50,4 @@ class Quiz(models.Model):
 
     def __str__(self):
         '''Returns the string representation of a model instance'''
-        return f"{self.id} {self.title}"
+        return f'{self.id} {self.title}'
