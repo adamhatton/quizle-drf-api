@@ -13,6 +13,7 @@ class QuizSerializer(serializers.ModelSerializer):
     like_id = serializers.SerializerMethodField()
     score_id = serializers.SerializerMethodField()
     likes_count = serializers.ReadOnlyField()
+    completed_count = serializers.ReadOnlyField()
 
     def get_is_owner(self, obj):
         '''
@@ -103,4 +104,5 @@ class QuizSerializer(serializers.ModelSerializer):
             'like_id',
             'score_id',
             'likes_count',
+            'completed_count',
         ]

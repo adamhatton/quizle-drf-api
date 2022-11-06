@@ -13,7 +13,8 @@ class QuizList(generics.ListCreateAPIView):
     serializer_class = QuizSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Quiz.objects.annotate(
-        likes_count=Count('likes'),
+        likes_count=Count('likes', distinct=True),
+        completed_count=Count('scores', distinct=True)
     ).order_by('-created_on')
 
     filter_backends = [
@@ -24,6 +25,7 @@ class QuizList(generics.ListCreateAPIView):
 
     ordering_fields = [
         'likes_count',
+        'completed_count',
     ]
 
     search_fields = [
@@ -33,6 +35,8 @@ class QuizList(generics.ListCreateAPIView):
 
     filterset_fields = [
         'category',
+        'owner',
+        'scores__owner',
     ]
 
     def perform_create(self, serializer):
