@@ -3,9 +3,11 @@ from rest_framework import serializers
 from .models import Like
 
 class LikeSerializer(serializers.ModelSerializer):
+    ''' Serializer for Like model data '''
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
+        ''' Metadata for Score Serializer '''
         model = Like
         fields = ['id', 'owner', 'quiz', 'created_at']
 
