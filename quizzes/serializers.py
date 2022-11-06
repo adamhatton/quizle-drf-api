@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from scores.models import Score
+from likes.models import Like
 from .models import Quiz
 
 
@@ -8,6 +10,8 @@ class QuizSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
+    like_id = serializers.SerializerMethodField()
+    score_id = serializers.SerializerMethodField()
 
     def get_is_owner(self, obj):
         '''
@@ -15,6 +19,30 @@ class QuizSerializer(serializers.ModelSerializer):
         '''
         request = self.context['request']
         return request.user == obj.owner
+
+    def get_like_id(self, obj):
+        '''
+        Returns the like.id if the quiz has been liked by the user
+        '''
+        user = self.context['request'].user
+        if user.is_authenticated:
+            like = Like.objects.filter(
+                owner=user, quiz=obj
+            ).first()
+            return like.id if like else None
+        return None
+
+    def get_score_id(self, obj):
+        '''
+        Returns the score.id if the user has completed the quiz
+        '''
+        user = self.context['request'].user
+        if user.is_authenticated:
+            score = Score.objects.filter(
+                owner=user, quiz=obj
+            ).first()
+            return score.id if score else None
+        return None
 
     def validate_time_limit_seconds(self, value):
         '''
@@ -71,4 +99,6 @@ class QuizSerializer(serializers.ModelSerializer):
             'is_owner',
             'profile_id',
             'profile_image',
+            'like_id',
+            'score_id',
         ]
