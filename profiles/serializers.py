@@ -6,6 +6,8 @@ class ProfileSerializer(serializers.ModelSerializer):
     ''' Serializer for Profile Model data '''
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
+    created_quizzes_count = serializers.ReadOnlyField() 
+    completed_quizzes_count = serializers.ReadOnlyField() 
 
     def get_is_owner(self, obj):
         '''
@@ -36,4 +38,6 @@ class ProfileSerializer(serializers.ModelSerializer):
             'created_on',
             'updated_on',
             'is_owner',
+            'created_quizzes_count',
+            'completed_quizzes_count',
         ]
