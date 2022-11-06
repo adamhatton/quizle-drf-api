@@ -12,6 +12,7 @@ class QuizSerializer(serializers.ModelSerializer):
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     like_id = serializers.SerializerMethodField()
     score_id = serializers.SerializerMethodField()
+    likes_count = serializers.ReadOnlyField()
 
     def get_is_owner(self, obj):
         '''
@@ -101,4 +102,5 @@ class QuizSerializer(serializers.ModelSerializer):
             'profile_image',
             'like_id',
             'score_id',
+            'likes_count',
         ]

@@ -1,3 +1,4 @@
+from django.db.models import Count
 from rest_framework import generics, permissions
 from quizle.permissions import IsOwnerOrReadOnly
 from .models import Quiz
@@ -10,7 +11,9 @@ class QuizList(generics.ListCreateAPIView):
     '''
     serializer_class = QuizSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    queryset = Quiz.objects.all()
+    queryset = Quiz.objects.annotate(
+        likes_count=Count('likes'),
+    ).order_by('-created_on')
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
