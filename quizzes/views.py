@@ -49,4 +49,7 @@ class QuizDetail(generics.RetrieveUpdateDestroyAPIView):
     '''
     serializer_class = QuizSerializer
     permission_classes = [IsOwnerOrReadOnly]
-    queryset = Quiz.objects.all()
+    queryset = Quiz.objects.annotate(
+        likes_count=Count('likes', distinct=True),
+        completed_count=Count('scores', distinct=True)
+    ).order_by('-created_on')

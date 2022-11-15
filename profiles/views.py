@@ -22,4 +22,7 @@ class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     '''
     serializer_class = ProfileSerializer
     permission_classes = [IsOwnerOrReadOnly]
-    queryset = Profile.objects.all()
+    queryset = Profile.objects.annotate(
+        created_quizzes_count=Count('owner__quiz', distinct=True),
+        completed_quizzes_count=Count('owner__score', distinct=True)
+    ).order_by('-created_on')
