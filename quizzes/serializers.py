@@ -12,6 +12,7 @@ class QuizSerializer(serializers.ModelSerializer):
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     like_id = serializers.SerializerMethodField()
     score_id = serializers.SerializerMethodField()
+    score_time = serializers.SerializerMethodField()
     likes_count = serializers.ReadOnlyField()
     completed_count = serializers.ReadOnlyField()
 
@@ -44,6 +45,18 @@ class QuizSerializer(serializers.ModelSerializer):
                 owner=user, quiz=obj
             ).first()
             return score.id if score else None
+        return None
+
+    def get_score_time(self, obj):
+        '''
+        Returns the score.completed_time if the user has completed the quiz
+        '''
+        user = self.context['request'].user
+        if user.is_authenticated:
+            score = Score.objects.filter(
+                owner=user, quiz=obj
+            ).first()
+            return score.completed_time if score else None
         return None
 
     def validate_time_limit_seconds(self, value):
@@ -103,6 +116,7 @@ class QuizSerializer(serializers.ModelSerializer):
             'profile_image',
             'like_id',
             'score_id',
+            'score_time',
             'likes_count',
             'completed_count',
         ]
