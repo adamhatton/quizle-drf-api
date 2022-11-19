@@ -25,9 +25,9 @@ class ScoreList(generics.ListCreateAPIView):
         serializer.save(owner=self.request.user)
 
 
-class ScoreDetail(generics.RetrieveDestroyAPIView):
+class ScoreDetail(generics.RetrieveUpdateDestroyAPIView):
     '''
-    Enable a single score to be retrieved and deleted
+    Enable owner to edit, update or delete a score
     '''
     serializer_class = ScoreSerializer
     permission_classes = [IsOwnerOrReadOnly]
