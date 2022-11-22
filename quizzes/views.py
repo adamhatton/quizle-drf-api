@@ -14,7 +14,8 @@ class QuizList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Quiz.objects.annotate(
         likes_count=Count('likes', distinct=True),
-        completed_count=Count('scores', distinct=True)
+        completed_count=Count('scores', distinct=True),
+        comments_count=Count('comment', distinct=True),
     ).order_by('-created_on')
 
     filter_backends = [
@@ -51,5 +52,6 @@ class QuizDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Quiz.objects.annotate(
         likes_count=Count('likes', distinct=True),
-        completed_count=Count('scores', distinct=True)
+        completed_count=Count('scores', distinct=True),
+        comments_count=Count('comment', distinct=True),
     ).order_by('-created_on')
