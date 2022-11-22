@@ -28,4 +28,5 @@ urlpatterns = [
     path('', include('quizzes.urls')),
     path('', include('scores.urls')),
     path('', include('likes.urls')),
+    path('', include('comments.urls')),
 ]

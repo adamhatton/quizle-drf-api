@@ -83,6 +83,7 @@ INSTALLED_APPS = [
     'quizzes',
     'scores',
     'likes',
+    'comments',
 ]
 
 SITE_ID = 1
