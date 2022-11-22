@@ -15,6 +15,10 @@ class Like(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        '''
+        Orders like objects in reverse order of when they were created.
+        Ensures a user can only like a quiz once
+        '''
         ordering = ['-created_at']
         unique_together = ['owner', 'quiz']
 
