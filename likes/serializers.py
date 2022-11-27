@@ -2,6 +2,7 @@ from django.db import IntegrityError
 from rest_framework import serializers
 from .models import Like
 
+
 class LikeSerializer(serializers.ModelSerializer):
     ''' Serializer for Like model data '''
     owner = serializers.ReadOnlyField(source='owner.username')
@@ -16,5 +17,5 @@ class LikeSerializer(serializers.ModelSerializer):
             return super().create(validated_data)
         except IntegrityError:
             raise serializers.ValidationError({
-                'detail': 'Error creating like. User has already liked this quiz'
+                'detail': 'Error creating like. User already liked this quiz'
             })

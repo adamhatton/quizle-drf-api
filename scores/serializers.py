@@ -16,7 +16,6 @@ class ScoreSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.owner
 
-
     class Meta:
         ''' Metadata for Score Serializer '''
         model = Score
@@ -37,6 +36,6 @@ class ScoreSerializer(serializers.ModelSerializer):
         except IntegrityError:
             raise serializers.ValidationError({
                 'detail': (
-                    'Error creating score. User already has a score for this quiz'
+                    'Error creating score. User score already exists for quiz'
                 )
             })

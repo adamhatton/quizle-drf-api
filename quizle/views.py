@@ -5,10 +5,13 @@ from .settings import (
     JWT_AUTH_SECURE,
 )
 
+
 @api_view()
 def root_route(request):
     return Response({"message": "Welcome to the quizle API!"})
 
+
+# Code taken from Code Institute 'Moments' Walkthrough project
 @api_view(['POST'])
 def logout_route(request):
     response = Response()

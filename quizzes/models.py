@@ -41,7 +41,6 @@ class Quiz(models.Model):
     hint_9 = models.CharField(max_length=50)
     hint_10 = models.CharField(max_length=50)
 
-
     class Meta:
         '''
         Orders Quiz objects in reverse order of when they were created

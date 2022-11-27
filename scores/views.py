@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions, filters
+from rest_framework import generics, permissions
 from django_filters.rest_framework import DjangoFilterBackend
 from quizle.permissions import IsOwnerOrReadOnly
 from .models import Score
