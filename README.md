@@ -48,11 +48,11 @@ The repository for the front end can be found [here](https://github.com/adamhatt
 
 ### User Stories
 
-The API and database was designed to meet the needs of the user stories within the Quizle front end project. These can be seen in front end repository, here: TO INPUT
+The API and database was designed to meet the needs of the user stories within the Quizle front end project. These can be seen in front end repository, here: https://github.com/adamhatton/quizle#epics-and-user-stories
 
 ### Database Schema
 
-The database was built using the Django Rest Framework and makes use of Django models, serializers, and views. A diagram of the Data Scheme can be seen below:
+The database was built using the Django Rest Framework and makes use of Django models, serializers, and views. A diagram of the Data Schema can be seen below:
 
 ![database schema screenshot](docs/screenshots/database-schema.jpg)
 
@@ -84,7 +84,7 @@ The Quiz model makes use of the Django generics API views and uses the following
 	- Users to retrieve a list of Quizzes
 	- Users to create a quiz
 	- Additional 'count' fields to be added to the serializer (likes_count, completed_count, comments_count)
-	- Quizzes to be filtered based category, owner and score_owner
+	- Quizzes to be filtered based on category, owner and score_owner
 	- Quizzes to be searched based on username or Quiz Title
 	- Quizzes to be ordered based on likes_count and completed_count
 - A RetrieveUpdateDestroyAPIView which enables:
@@ -125,7 +125,7 @@ The Profile model makes use of the Django generics API views and uses the follow
 
 **Model**
 
-An instance of this model is created when a user completes a quiz and contains the user's fastest time for completion. Instances of this model are created automatically on the front end.
+An instance of this model is created when a user completes a quiz and it contains the user's fastest time for completion. Instances of this model are created automatically on the front end.
 
 A user can only have one score per quiz, so the model prevents additional instances being made for the same user.
 
@@ -161,7 +161,7 @@ A user can only have one like per quiz, so the model prevents additional instanc
 
 **Serializer**
 
-The Like model has a serializer just returns the standard model fields when an instance is returned by the API.
+The Like model has a serializer that just returns the standard model fields when an instance is returned by the API.
 
 In addition, the serializer also contains a function for handling the scenario of multiple Likes being made for a user on the same quiz.
 
@@ -171,7 +171,7 @@ The Score model makes use of the Django generics API views and uses the followin
 
 - A ListCreateAPIView which enables:
 	- Users to retrieve a list of Likes
-	- Users to create a Likes
+	- Users to create a Like
 - A RetrieveDestroyAPIView which enables:
 	- Users to obtain a single Like instance
 	- Users to delete a single Like instance (if they own it)
@@ -198,14 +198,10 @@ The Comment model makes use of the Django generics API views and uses the follow
 	- Users to retrieve a list of Comments
 	- Users to create a Comment
 	- Users to filter comments based on the quiz they relate to
-- A RetrieveDestroyAPIView which enables:
+- A RetrieveUpdateDestroyAPIView which enables:
 	- Users to obtain a single Comment instance
 	- Users to update a single Comment instance (if they own it)
 	- Users to delete a single Comment instance (if they own it)
-
-- Name, email address and message are required fields so that the site owner doesn't receive blank messages, but also to ensure that there is an email address available for response
-- The phone number field holds the visitor's phone number. It is available in the contact form if users are happy to provide it as it is a faster means of communication, however it is not required - this is so that users only have to enter minimal information before being able to send a message. The phone number field was implemented using the `django-phonenumber-field` library with the default region set to Great Britain to enable validation for GB numbers
-- The submitted and completed fields are for management in the admin site. Submitted uses the django `auto_now_add` feature to populate the date and time contact was sent which allows the site owner to see this in the admin site. The completed field is a Boolean field that the site owner can use to mark a message as having been responded to
 
 ## Testing
 
@@ -224,7 +220,7 @@ I manually tested each of the Models along with their serializers and views by u
 - Users cannot access or write to endpoints that they do not have authorisation for
 - Filters, searching, and ordering works
 
-The exact tests I completed can be seen in the screen shots below, or alternatively an excel document containing the information can be found here TO INPUT:
+The exact tests I completed can be seen in the screen shots below, or alternatively an excel document containing the information can be found [here](docs/testing/quizle-drfapi-testing.xlsx):
 
 <details><summary>Comment Tests</summary>
 
@@ -275,12 +271,12 @@ After the first pass through the CI Python Linter, there were some minor errors 
 
 **Frameworks & Libraries**
 
-- [Cloudinary](https://cloudinary.com/) - used to store and serve the static files
+- [Cloudinary](https://cloudinary.com/) - used to store and serve files
 - [Django](https://www.djangoproject.com/) - used to build the database
 - [Django rest auth](https://django-rest-auth.readthedocs.io/en/latest/) - used for implementing account authorisation
 - [Django Rest Framework](https://www.django-rest-framework.org/) - used to develop the API that works in conjunction with the database
 - [dj-database-url](https://pypi.org/project/dj-database-url/) - used for working with database URLs
-- [django-cors-headers](https://pypi.org/project/dj-database-url/) - used for working with Cross-Origin Resource Sharing
+- [django-cors-headers](https://pypi.org/project/django-cors-headers/) - used for working with Cross-Origin Resource Sharing
 - [django-filter](https://django-filter.readthedocs.io/en/stable/) - used to enable filtering of resources
 - [djangorestframework-simplejwt](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/) - used to enable the use of JSON Web Tokens with the API
 - [Gunicorn](https://gunicorn.org/) - used for a WSGI HTTP server for the website
@@ -300,9 +296,8 @@ After the first pass through the CI Python Linter, there were some minor errors 
 ### Testing Technologies
 
 - [Code Institute Python Linter](https://pep8ci.herokuapp.com/) - used for linting Python code
-- [flake8](https://pypi.org/project/pycodestyle/) - used for linting Python code
-- [pycodestyle](https://flake8.pycqa.org/en/latest/) - used for linting Python code
-
+- [flake8](https://flake8.pycqa.org/en/latest/) - used for linting Python code
+- [pycodestyle](https://pypi.org/project/pycodestyle/) - used for linting Python code
 
 ## Deployment
 
@@ -326,40 +321,48 @@ This API is built using the Django Rest Framework (DRF), so having a DRF project
 
 3. Once all the dependencies are installed, generate a requirements.txt document for them by using: `pip freeze > requirements.txt`. This will store the dependencies of the project in a file called requirements.txt
 4. Next, start a new Django project using the command `django-admin startproject <your-project-name> .` (don't leave off the dot at the end as this determines where the project is created).
-5a. Add your installed apps to the `settings.py` file INSTALLED_APPS variable. The required lines are:
-`'cloudinary_storage',
-    'cloudinary',
-    'rest_framework',
-    'django_filters',
-    'rest_framework.authtoken',
-    'dj_rest_auth',
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'dj_rest_auth.registration',
-    'corsheaders',`
-5b. To configure cloudinary, the following variables need to be set in settings.py: 
-- `CLOUDINARY_STORAGE`: this should be set to your own cloudinary URL. This should be done by creating a `CLOUDINARY_URL` environment variable in an env.py file (the env.py file should be created at the top level of your project):
-`import os
+5. Add your installed apps to the `settings.py` file INSTALLED_APPS variable. The required lines are:
+~~~
+'cloudinary_storage',
+'cloudinary',
+'rest_framework',
+'django_filters',
+'rest_framework.authtoken',
+'dj_rest_auth',
+'django.contrib.sites',
+'allauth',
+'allauth.account',
+'allauth.socialaccount',
+'dj_rest_auth.registration',
+'corsheaders',`
+~~~
+6. To configure cloudinary, the following variables need to be set in settings.py: 
+- `CLOUDINARY_STORAGE`: this should be set to your own cloudinary URL. This should be done by creating a `CLOUDINARY_URL` environment variable in an env.py file as follows (the env.py file should be created at the top level of your project):
+~~~
+import os
 
-os.environ['CLOUDINARY_URL'] = 'cloudinary:<your unique url>`
+os.environ['CLOUDINARY_URL'] = 'cloudinary:<your unique url>
+~~~
 
 and importing this into the settings.py file using the following:
-`import os
+~~~
+import os
 if os.path.exists('env'):
-    import env`.
+    import env
+~~~
  
 `CLOUDINARY_STORAGE` can then be set to: `{'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')}` which will retrieve the env.py variable in a development environment, but also enable a Config Var to be set in Heroku for deployment to Heroku.
 
 - `MEDIA_URL`: this is set to '/media/' in this project
 - `DEFAULT_FILE_STORAGE`: this should be set to 'cloudinary_storage.storage.MediaCloudinaryStorage'
-6. For `dj-rest-auth` and `'dj-rest-auth[with_social]'`, ensure that the urls are added to a urls.py file in the <your app title> directory:
-`path('dj-rest-auth/', include('dj_rest_auth.urls')),
-path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),`
-7. Below the INSTALLED_APPS in settings.py, add: `SITE_ID = 1`
-8. Migrations need to be run to set the database up, this can be done with `python3 manage.py migrate`
-9. Finally, you can commit and push your changes to GitHub using :
+7. For `dj-rest-auth` and `'dj-rest-auth[with_social]'`, ensure that the urls are added to a urls.py file in the 'your app title' directory:
+~~~
+path('dj-rest-auth/', include('dj_rest_auth.urls')),
+path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+~~~
+8. Below the INSTALLED_APPS in settings.py, add: `SITE_ID = 1`
+9. Migrations need to be run to set the database up, this can be done with `python3 manage.py migrate`
+10. Finally, you can commit and push your changes to GitHub using :
 	`git add .
 	git commit -m "initial commit
 	git push`
@@ -370,58 +373,73 @@ To configure and enable JWT Tokens, complete the following steps:
 
 1. Install the dj-rest-auth package for JWT tokens using `pip install djangorestframework-simplejwt`
 2. Create a session authentication value for differentiating between Development and Production environments, this should be added to the env.py file: `os.environ['DEV'] = '1'`
-3. Use the session authentication value in settings.py to determine whether to use SessinAuthentication (for in Dev) or JWT Tokens (for in Production) using the following:
-`REST_FRAMEWORK = {
+3. Use the session authentication value in settings.py to determine whether to use SessionAuthentication (for in Dev) or JWT Tokens (for in Production) using the following:
+~~~
+REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [( 
         'rest_framework.authentication.SessionAuthentication' 
         if 'DEV' in os.environ 
         else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
     )]
-}`
+}
+~~~
 4. Add `REST_USE_JWT = True` to enable token authentication
 5. Add `JWT_AUTH_SECURE = True` to ensure tokens are only sent over HTTPS
 6. Give cookie names to the access and refresh tokens using:
-`JWT_AUTH_COOKIE = 'my-app-auth'`
-`JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'`
+~~~
+JWT_AUTH_COOKIE = 'my-app-auth'
+JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
+~~~
 
-#### Additional Configuration / Heroku Deployment Preparation
+#### Additional Configuration and Heroku Deployment Preparation
 
 1. Add pagination to the API results by adding the following into the `REST_FRAMEWORK` variable:
-`'DEFAULT_PAGINATION_CLASS':
+~~~
+'DEFAULT_PAGINATION_CLASS':
 'rest_framework.pagination.PageNumberPagination',
-'PAGE_SIZE': 10,`
+'PAGE_SIZE': 10,
+~~~
 2. Add date and time formatting into the `REST_FRAMEWORK` variable:
 `'DATETIME_FORMAT': '%d %b %Y'`
 3. Set the default renderer to be JSON Renderer in the Production environment:
-`if 'DEV' not in os.environ:
+~~~
+if 'DEV' not in os.environ:
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
         'rest_framework.renderers.JSONRenderer'
-    ]`
+    ]
+~~~
 4. Install the PostGres Database using `pip3 install dj_database_url==0.5.0 psycopg2`
 5. Import the dj_database_url into settings.py: `import dj_database_url`
 6. Set the Dev environment to use the SQLite database and the Production environment to use PostGres with the following:
-`DATABASES = {
+~~~
+DATABASES = {
     'default': ({
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     } if 'DEV' in os.environ else dj_database_url.parse(
         os.environ.get('DATABASE_URL')
     ))
-}`
+}
+~~~
 7. Create a Procfile at the top level of your project and include the following:
-`release: python manage.py makemigrations && python manage.py migrate
+~~~
+release: python manage.py makemigrations && python manage.py migrate
 
-web: gunicorn <your app name>.wsgi`
-8. Set the ALLOWED_HOSTS variable as follows (note that the `os.environ.get('ALLOWED_HOST') will reference a Config Var that is set in Heroku later):
-`ALLOWED_HOSTS = [
+web: gunicorn <your app name>.wsgi
+~~~
+8. Set the ALLOWED_HOSTS variable as follows (note that the `os.environ.get('ALLOWED_HOST')` will reference a Config Var that is set in Heroku later):
+~~~
+ALLOWED_HOSTS = [
     os.environ.get('ALLOWED_HOST'),
     'localhost',
-]`
+]
+~~~
 9. Add the following line to the top of the MIDDLEWARE list in settings.py:
 `'corsheaders.middleware.CorsMiddleware',`
 10. Add `import re` to the imports in settings.py
 11. Add the following code for CORS configuration:
-`if 'CLIENT_ORIGIN' in os.environ:
+~~~
+if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGINS = [
         os.environ.get('CLIENT_ORIGIN')
     ]
@@ -432,19 +450,21 @@ if 'CLIENT_ORIGIN_DEV' in os.environ:
     ).group(0)
     CORS_ALLOWED_ORIGIN_REGEXES = [
         rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
-    ]`
+    ]
+~~~
 12. Allow Cookies using `CORS_ALLOW_CREDENTIALS = True` in settings.py
 13. Add `JWT_AUTH_SAMESITE = 'None'` to settings.py
 14. Create a new SECRET_KEY in env.py and replace the insecure key in settings.py as follows:
 `SECRET_KEY = os.environ.get('SECRET_KEY')`
 15. Set DEBUG in settings.py to only be True in Development using:
 `DEBUG = 'DEV' in os.environ`
+16. Add, commit and push all changes to GitHub.
 
 ### Heroku
 
 Once a Django project has been set up and developed, it can be deployed to Heroku using the following steps (this is how this project was deployed):
 
-1.	Ensure that all dependencies are in the requirements.txt file within the project using the python command `pip freeze > requirements.txt`:
+1.	Ensure that all dependencies are in the requirements.txt file within the project using the python command: `pip freeze > requirements.txt`
 2.	Navigate to https://www.heroku.com/ and login
 3.	In the top right corner, select ‘New’ then ‘Create new app’
 4.	From the ‘Create New App’ screen, enter a unique App name and select Europe, then select ‘Create app’
