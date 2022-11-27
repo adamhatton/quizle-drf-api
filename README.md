@@ -363,9 +363,11 @@ path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
 8. Below the INSTALLED_APPS in settings.py, add: `SITE_ID = 1`
 9. Migrations need to be run to set the database up, this can be done with `python3 manage.py migrate`
 10. Finally, you can commit and push your changes to GitHub using :
-	`git add .
-	git commit -m "initial commit
-	git push`
+~~~
+git add .
+git commit -m "initial commit
+git push
+~~~
 
 #### JWT Tokens
 
@@ -471,6 +473,8 @@ Once a Django project has been set up and developed, it can be deployed to Herok
 5.	An app is created and the dashboard is shown, from here navigate to the 'Resources tab'
 6.	The Postgres database needs to be connected to the app using an add-on. Search the 'Add-ons' in the Resources tab for 'Heroku Postgres' and select this add-on
 7.	On the pop-up for Heroku Postgres select a plan type (for this site 'Hobby Dev - Free' was selected)
+    - Note that this project was originally set up using a Heroku Postgres database, but this was migrated to ElephantSQL
+    - To deploy in the same way you will need to create an account with ElephantSQL and setup a database. You can then take the database URL that is provided and update the value of the 'DATABASE_URL' in config vars
 
 8.	Navigate to the 'Settings' tab for the app and select to 'Reveal Config Vars', then create the following Config Vars:
 - CLOUDINARY_URL: Value for this is the same as CLOUDINARY_URL from your env.py file
