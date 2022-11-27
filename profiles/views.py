@@ -16,9 +16,9 @@ class ProfileList(generics.ListAPIView):
     ).order_by('-created_on')
 
 
-class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
+class ProfileDetail(generics.RetrieveUpdateAPIView):
     '''
-    Displays a single profile and allows the owner to edit or delete it
+    Displays a single profile and allows the owner to edit it
     '''
     serializer_class = ProfileSerializer
     permission_classes = [IsOwnerOrReadOnly]
