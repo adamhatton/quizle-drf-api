@@ -10,6 +10,8 @@ class Profile(models.Model):
     '''
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
+    # Default profile image taken from:
+    # https://pixabay.com/vectors/user-icon-person-personal-about-me-2935527/
     image = models.ImageField(
         upload_to='images/', default='../default_user_geiijk'
     )
