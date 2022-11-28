@@ -19,6 +19,7 @@ The live site for the front end can be found [here](https://quizle-ah.herokuapp.
 
 The repository for the front end can be found [here](https://github.com/adamhatton/quizle).
 
+## Table of Contents
 
 - [Design](<#design>)
 	- [User Stories](<#user-stories>)
