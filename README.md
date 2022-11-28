@@ -13,7 +13,7 @@ The API allows calls to the Quizle database and enables CRUD functionality for d
 
 ## Live Site
 
-The API for the back end can be access directly [here](https://quizle-drf-api.herokuapp.com/).
+The API for the back end can be accessed directly [here](https://quizle-drf-api.herokuapp.com/).
 
 The live site for the front end can be found [here](https://quizle-ah.herokuapp.com/).
 
@@ -276,7 +276,7 @@ After the first pass through the CI Python Linter, there were some minor errors 
 - [Django](https://www.djangoproject.com/) - used to build the database
 - [Django rest auth](https://django-rest-auth.readthedocs.io/en/latest/) - used for implementing account authorisation
 - [Django Rest Framework](https://www.django-rest-framework.org/) - used to develop the API that works in conjunction with the database
-- [dj-database-url](https://pypi.org/project/dj-database-url/) - used for working with database URLs
+- [dj-database-url](https://pypi.org/project/dj-database-url/) - used for working with the database
 - [django-cors-headers](https://pypi.org/project/django-cors-headers/) - used for working with Cross-Origin Resource Sharing
 - [django-filter](https://django-filter.readthedocs.io/en/stable/) - used to enable filtering of resources
 - [djangorestframework-simplejwt](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/) - used to enable the use of JSON Web Tokens with the API
@@ -366,7 +366,7 @@ path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
 10. Finally, you can commit and push your changes to GitHub using :
 ~~~
 git add .
-git commit -m "initial commit
+git commit -m "initial commit"
 git push
 ~~~
 
